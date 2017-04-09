@@ -16,36 +16,38 @@ function iterateFilms(data, property, element) {
 
   }
 
-  console.log(data.next)
-    console.log(data)
 
   for (let i = 0; i < data.results.length; ++i) {
     let newList = document.createElement('li');
     newList.class = 'film';
     document.querySelector('#filmList').appendChild(newList);
-    newH2 = document.createElement('h2');
+    let newH2 = document.createElement('h2');
     newH2.class = 'filmTitle';
     newH2.innerHTML = data.results[i].title;
     newList.appendChild(newH2);
+    let newH3 = document.createElement('h3');
+    newH3.innerHTML = 'Planets';
+    newList.appendChild(newH3);
+    let newUL = document.createElement('ul');
+    newUL.class = 'filmPlanets';
+    newList.appendChild(newUL);
+
+    for (let j = 0; j < data.results[i].planets.length; ++j) {
+      getData(data.results[i].planets[j], 'name', newUL, iteratePlanets);
+    }
   }
 
 }
 
-/*
 function iteratePlanets(data, property, element) {
-  const filmList = document.querySelector('#filmsList');
-  if (data.next !== null && data.next !== undefined) {
-    console.log(data.next)
-    console.log(data)
-    getData(data.next, 'name', '#person14Species', iteratePlanets);
-  }
-
-  for (let i = 0; i < data.results.length; ++i) {
-    let newElement = document.createElement('li');
-
-  }
-
-}*/
+  let newLI = document.createElement('li');
+  newLI.class = 'planet';
+  let newH4 = document.createElement('h4');
+  newH4.class = 'planetName';
+  newH4.innerHTML = data.name;
+  newLI.appendChild(newH4);
+  element.appendChild(newLI);
+}
 
 
 getData('http://swapi.co/api/people/4/', 'name', '#person4Name', function(data, property, element) {
