@@ -34,7 +34,6 @@ function iterateFilms(data, property, element) {
       getData(data.results[i].planets[j], 'name', newUL, iteratePlanets);
     }
   }
-
 }
 
 function iteratePlanets(data, property, element) {
